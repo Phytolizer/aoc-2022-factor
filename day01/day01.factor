@@ -10,6 +10,7 @@ splitting
     ;
 IN: aoc2022.day01
 
+<PRIVATE
 : split-chunks ( seq subseq -- seq )
     ! seq subseq
     swap over
@@ -33,12 +34,14 @@ IN: aoc2022.day01
 
 : calories-per-elf ( str -- str )
     "\n\n" split-chunks
-    [ "\n" split
-      [ string>number ] map sum
+    [ "\n" split harvest
+      [ string>number ] map
+      sum
     ] map
 
     sort
     ;
+PRIVATE>
 
 : solve ( str part -- str )
     {

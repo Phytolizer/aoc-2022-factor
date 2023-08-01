@@ -6,11 +6,12 @@ IN: aoc2022
 QUALIFIED-WITH: aoc2022.day01 day01
 
 :: main ( -- )
-    command-line get <reversed> >vector :> args
-    args pop string>number :> day
-    args pop string>number :> part
-    args pop utf8 file-contents :> input
-    day {
+    command-line get <reversed> first3
+    :> input :> day :> part
+
+    input utf8 file-contents :> input
+    part string>number :> part
+    day string>number {
         { 1 [ input part day01:solve print ] }
     } case
     ;

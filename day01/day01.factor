@@ -1,4 +1,5 @@
 USING:
+aoc2022.util
 annotations
 combinators
 kernel
@@ -11,42 +12,20 @@ splitting
 IN: aoc2022.day01
 
 <PRIVATE
-: split-chunks ( seq subseq -- seq )
-    ! seq subseq
-    swap over
-    ! subseq seq subseq
-    { }
-    [ pick f = ] [
-        ! seq subseq res
-        [
-            ! seq subseq
-            split1 swap
-            ! after before
-        ] dip
-        ! seq after before res
-        swap suffix
-        ! subseq after res
-        [ over ] dip
-        ! after subseq res
-    ] until
-    [ 3drop ] dip
+: handle-chunk ( str -- n )
+    lines [ string>number ] map sum
     ;
 
 : calories-per-elf ( str -- str )
     "\n\n" split-chunks
-    [ "\n" split harvest
-      [ string>number ] map
-      sum
-    ] map
-
-    sort
+    [ handle-chunk ] map sort
     ;
 PRIVATE>
 
-: solve ( str part -- str )
-    {
-        { 1 [ calories-per-elf last ] }
-        { 2 [ calories-per-elf 3 tail* sum ] }
+:: solve ( str part -- str )
+    part {
+        { 1 [ str calories-per-elf last ] }
+        { 2 [ str calories-per-elf 3 tail* sum ] }
     } case
     number>string
     ;

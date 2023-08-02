@@ -3,7 +3,7 @@
 USING: combinators command-line io io.encodings.utf8 io.files
 kernel math.parser namespaces prettyprint sequences vectors ;
 IN: aoc2022
-QUALIFIED-WITH: aoc2022.day01 day01
+USING: aoc2022.day01 aoc2022.day02 ;
 
 :: main ( -- )
     command-line get <reversed> first3
@@ -12,7 +12,8 @@ QUALIFIED-WITH: aoc2022.day01 day01
     input utf8 file-contents :> input
     part string>number :> part
     day string>number {
-        { 1 [ input part day01:solve print ] }
+        { 1 [ input part day01 print ] }
+        { 2 [ input part day02 print ] }
     } case
     ;
 

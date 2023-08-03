@@ -1,14 +1,4 @@
-USING:
-aoc2022.util
-annotations
-combinators
-kernel
-math
-math.parser
-sequences
-sorting
-splitting
-    ;
+USING: aoc2022.util kernel math.parser sequences sorting ;
 IN: aoc2022.day01
 
 <PRIVATE

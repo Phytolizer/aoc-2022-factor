@@ -1,14 +1,14 @@
 ! Copyright (C) 2023 Kyle Coffey.
 ! See https://factorcode.org/license.txt for BSD license.
-USING: combinators command-line formatting io io.encodings.utf8 io.files
-kernel math math.parser namespaces prettyprint sequences vectors words ;
+USING: command-line formatting io io.encodings.utf8 io.files
+kernel math.parser namespaces sequences vocabs words ;
 IN: aoc2022
-USING: aoc2022.day01 aoc2022.day02 ;
 
 : dayname ( n -- str ) "day%02d" sprintf ;
 : input-path ( day input -- str ) "%s/%s.txt" sprintf ;
 :: run-day ( str part day -- str )
     day "aoc2022.%s" sprintf :> vocab
+    vocab require
     day vocab lookup-word :> day
     str part day execute( str part -- str )
     ;

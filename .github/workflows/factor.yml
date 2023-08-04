@@ -21,6 +21,7 @@ jobs:
       hash: ${{ steps.check.outputs.factor_hash }}
     steps:
       - name: Check Factor repository HEAD
+        id: check
         run: >
           git ls-remote https://github.com/factor/factor HEAD
           | cut -f1

@@ -22,9 +22,10 @@ jobs:
     steps:
       - name: Check Factor repository HEAD
         run: >
-          git ls-remote https://github.com/factor/factor.git HEAD
+          git ls-remote https://github.com/factor/factor HEAD
           | cut -f1
-          | printf "factor_hash=%s" >> "$GITHUB_OUTPUT"
+          | xargs printf "factor_hash=%s\n"
+          | tee "$GITHUB_OUTPUT"
   # This workflow contains a single job called "build"
   build-factor:
     # The type of runner that the job will run on

@@ -61,4 +61,4 @@ jobs:
 
       - name: Test code
         working-directory: ./factor
-        run: factor -run=tools.test aoc2022
+        run: ./factor -run=tools.test aoc2022

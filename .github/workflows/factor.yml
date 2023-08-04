@@ -1,0 +1,68 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Factor
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  check-factor:
+    runs-on: ubuntu-latest
+    outputs:
+      hash: ${{ steps.check.outputs.factor_hash }}
+    steps:
+      - name: Check Factor repository HEAD
+        run: >
+          git ls-remote https://github.com/factor/factor.git HEAD
+          | cut -f1
+          | printf "factor_hash=%s" >> "$GITHUB_OUTPUT"
+  # This workflow contains a single job called "build"
+  build-factor:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: check-factor
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Cache Factor repository
+        id: cache-factor
+        uses: actions/cache@v3
+        with:
+          path: ./factor
+          key: ${{ runner.os }}-cache-factor-${{ needs.check-factor.outputs.hash }}
+          restore-keys: |
+            ${{ runner.os }}-cache-factor-
+
+      - name: Check out Factor
+        if: ${{ steps.cache-factor.outputs.cache-hit != 'true' }}
+        uses: actions/checkout@v3
+        with:
+          repository: factor/factor
+          path: ./factor
+
+      - name: Build Factor
+        if: ${{ steps.cache-factor.outputs.cache-hit != 'true' }}
+        working-directory: ./factor
+        run: ./build.sh net-bootstrap
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build-factor
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v3
+        with:
+          path: ./factor/work/aoc2022
+
+      - name: Test code
+        working-directory: ./factor
+        run: factor -run=tools.test aoc2022

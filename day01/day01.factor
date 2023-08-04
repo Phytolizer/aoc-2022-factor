@@ -1,13 +1,13 @@
-USING: aoc2022.util kernel math.parser sequences sorting ;
+USING: aoc2022.util kernel math.parser sequences sorting splitting ;
 IN: aoc2022.day01
 
 <PRIVATE
 : handle-chunk ( str -- n )
-    lines [ string>number ] map sum
+    [ string>number ] map sum
     ;
 
 : calories-per-elf ( str -- str )
-    "\n\n" split-chunks
+    split-lines [ empty? ] split-when
     [ handle-chunk ] map sort
     ;
 

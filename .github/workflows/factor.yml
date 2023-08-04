@@ -1,5 +1,3 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Factor
 
 # Controls when the workflow will run
@@ -27,13 +25,9 @@ jobs:
           | cut -f1
           | xargs printf "factor_hash=%s\n"
           | tee "$GITHUB_OUTPUT"
-  # This workflow contains a single job called "build"
   build-factor:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     needs: check-factor
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Cache Factor repository
         id: cache-factor

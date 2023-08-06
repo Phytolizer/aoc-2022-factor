@@ -40,4 +40,4 @@ CONSTANT: A CHAR: A
 
 PRIVATE>
 
-: day03 ( str part -- n ) solver swap solve ;
+: day03 ( str part -- n ) solver solve ;

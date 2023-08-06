@@ -14,8 +14,8 @@ TUPLE: solver
     { part2 partfunc read-only initial: [ id ] }
     ;
 C: <solver> solver
-: solve ( str solver part -- str )
-    {
+: solve ( str part solver -- str )
+    swap {
         { 1 [ part1>> call( str -- str ) ] }
         { 2 [ part2>> call( str -- str ) ] }
     } case

@@ -19,4 +19,4 @@ MEMO: solver ( -- solver )
 
 PRIVATE>
 
-: day01 ( str part -- str ) solver swap solve ;
+: day01 ( str part -- str ) solver solve ;

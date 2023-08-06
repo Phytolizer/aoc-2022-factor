@@ -1,4 +1,4 @@
-! Copyright (C) 2023 Your name.
+! Copyright (C) 2023 Kyle Coffey.
 ! See https://factorcode.org/license.txt for BSD license.
 USING: aoc2022.util accessors kernel math math.parser sequences
 splitting ;

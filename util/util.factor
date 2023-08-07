@@ -1,4 +1,5 @@
-USING: accessors combinators effects kernel math quotations sequences splitting stack-checker ;
+USING: accessors combinators effects kernel math math.functions
+quotations sequences splitting stack-checker ;
 IN: aoc2022.util
 
 PREDICATE: partfunc < quotation infer ( x -- x ) effect= ;
@@ -26,13 +27,8 @@ C: <solver> solver
 TUPLE: step { seq read-only } { n read-only } ;
 C: <step> step
 
-M: step length [ seq>> length ] [ n>> ] bi /i ; inline
+M: step length [ seq>> length ] [ n>> ] bi / ceiling ; inline
 M: step virtual-exemplar seq>> ; inline
-M: step virtual@
-    [| n self |
-     n self n>> /i :> n
-     self seq>> [ n swap nth ] keep
-    ] call
-    ; inline
+M: step virtual@ [ n>> * ] [ seq>> ] bi ; inline
 
 INSTANCE: step virtual-sequence

@@ -8,3 +8,4 @@ MEMO: example ( -- str )
     ;
 
 { "CMZ" } [ example 1 day05 ] unit-test
+{ "MCD" } [ example 2 day05 ] unit-test

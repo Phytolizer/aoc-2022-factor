@@ -1,9 +1,8 @@
 ! Copyright (C) 2023 Kyle Coffey.
 ! See https://factorcode.org/license.txt for BSD license.
 USING: aoc2022.util ;
-USING: accessors assocs grouping kernel math math.parser sequences splitting ;
-USING: strings prettyprint ;
-USE: stack-checker
+USING: accessors assocs grouping kernel math math.parser sequences
+splitting strings ;
 IN: aoc2022.day05
 
 <PRIVATE

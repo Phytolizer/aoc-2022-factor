@@ -1,4 +1,4 @@
-USING: aoc2022.util kernel math.parser sequences sorting splitting ;
+USING: aoc2022.util math.parser sequences sorting splitting ;
 IN: aoc2022.day01
 
 <PRIVATE
